@@ -1,17 +1,14 @@
 package ui_tests;
 
-import dto.AuthenticationBody;
+import dto.User;
 import manager.AppManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
-
-import static java.sql.DriverManager.getDriver;
 
 public class LoginTests extends AppManager {
     @BeforeMethod
@@ -20,8 +17,8 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void LoginPositiveTest(){
-        AuthenticationBody user = AuthenticationBody.builder()
+    public void LoginPositiveTest() {
+        User user = User.builder()
                 .username("mammoth.isr@gmail.com")
                 .password("Zaqxsw39!")
                 .build();
