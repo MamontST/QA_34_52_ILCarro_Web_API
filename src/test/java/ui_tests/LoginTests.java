@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
+import static utils.UserFactory.positiveUser;
+
 public class LoginTests extends AppManager {
     @BeforeMethod
     public void goToLoginPage() {
@@ -18,10 +20,7 @@ public class LoginTests extends AppManager {
 
     @Test
     public void LoginPositiveTest() {
-        User user = User.builder()
-                .username("mammoth.isr@gmail.com")
-                .password("Zaqxsw39!")
-                .build();
+        User user = positiveUser();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnLogin();
