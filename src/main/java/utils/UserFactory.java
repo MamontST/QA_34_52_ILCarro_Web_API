@@ -13,4 +13,12 @@ public class UserFactory {
                 .build();
         return user;
     }
+
+    public static User wrongPasswordUser() {
+        return User.builder()
+                .username("mammoth.isr@gmail.com")
+                .password("123")
+                .build();
+    }
+
 }
