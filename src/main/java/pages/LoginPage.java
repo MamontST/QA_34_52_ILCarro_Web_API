@@ -44,6 +44,10 @@ public class LoginPage extends BasePage {
         pause(2000);
     }
 
+    public boolean isPopUpSuccessLoginDisplayed(){
+        return isElementDisplaed(dialogMessage);
+    }
+
     public void clickBtnLoginMessage() {
         btnLoginMessage.click();
     }
