@@ -51,7 +51,7 @@ public class LoginTests extends AppManager {
         loginPage.clickLoginForm();
         softAssert.assertEquals(loginPage.emailMessage(), "Email is required", "validate email message");
         softAssert.assertEquals(loginPage.passwordMessage(), "Password is required", "validate password message");
-        softAssert.assertFalse(loginPage.isTextInErrorPresent("Email is required"), "validate email message");
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"), "validate email message");
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "validate password message");
         softAssert.assertAll();
     }
