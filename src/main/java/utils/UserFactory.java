@@ -12,7 +12,7 @@ public class UserFactory {
               .firstName(faker.name().firstName())
               .lastName(faker.name().lastName())
               .username(faker.internet().emailAddress())
-              .password("Qwerty123!")
+              .password(PropertiesReader.getProperty("base.properties","password_for_registration"))
               .build();
       return user;
     };
@@ -29,13 +29,6 @@ public class UserFactory {
         return User.builder()
                 .username(getProperty("base.properties","email"))
                 .password("123")
-                .build();
-    }
-
-    public static User emptyPasswordUser() {
-        return User.builder()
-                .username(getProperty("base.properties","email"))
-                .password("")
                 .build();
     }
 
