@@ -32,4 +32,11 @@ public class UserFactory {
                 .build();
     }
 
+    public static User emptyPasswordUser() {
+        return User.builder()
+                .username(getProperty("base.properties","email"))
+                .password("")
+                .build();
+    }
+
 }

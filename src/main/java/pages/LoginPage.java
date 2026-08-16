@@ -63,4 +63,8 @@ public class LoginPage extends BasePage {
     public String passwordMessage(){
         return passwordMessage.getText();
     }
+
+    public boolean isBtnLoginEnabled() {
+        return btnLogin.isEnabled();
+    }
 }

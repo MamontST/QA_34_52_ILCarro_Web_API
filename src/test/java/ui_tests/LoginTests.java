@@ -11,8 +11,7 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 
-import static utils.UserFactory.positiveUser;
-import static utils.UserFactory.wrongPasswordUser;
+import static utils.UserFactory.*;
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
@@ -29,25 +28,33 @@ public class LoginTests extends AppManager {
         User user = positiveUser();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnLogin();
-        Assert.assertTrue(loginPage.isPopUpSuccessLoginDisplayed());
-        Assert.assertEquals(loginPage.getMessage(), "Logged in success");
+        softAssert.assertTrue(loginPage.isPopUpSuccessLoginDisplayed());
+        softAssert.assertEquals(loginPage.getMessage(), "Logged in success");
+        softAssert.assertAll();
         loginPage.clickBtnLoginMessage();
     }
 
     @Test
     public void loginNegativeWrongPasswordTest() {
         User user = wrongPasswordUser();
-        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnLogin();
 
         Assert.assertTrue(loginPage.getMessage().contains("Login or Password incorrect"));
         loginPage.clickBtnLoginMessage();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnLogin();
+    }
+
+    @Test
+    public void loginNegativeEmptyPasswordTest() {
+        User user = emptyPasswordUser();
+        loginPage.typeLoginForm(user);
+        Assert.assertFalse(loginPage.isBtnLoginEnabled());
     }
 
     @Test
     public void loginNegativeEmptyAllFields() {
-        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.clickLoginForm();
         softAssert.assertEquals(loginPage.emailMessage(), "Email is required", "validate email message");
         softAssert.assertEquals(loginPage.passwordMessage(), "Password is required", "validate password message");
