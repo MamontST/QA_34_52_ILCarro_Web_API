@@ -25,9 +25,20 @@ public class SighUpPage {
     @FindBy(xpath = "//input[@id='password']")
     WebElement inputPassword;
     @FindBy(xpath = "//button[@type='submit']")
-    WebElement btnRegistration;
-    @FindBy(xpath = "//input[@id='terms-of-use']")
+    WebElement btnYallaRegistration;
+    // //div[contains(@class, 'checkbox')]
+    // //input[@id='terms-of-use']"
+    @FindBy(xpath = "//div[contains(@class, 'checkbox')]")
     WebElement inputTermsOfUse;
+    @FindBy(xpath = "//div[contains(text(), 'Name is required')]")
+    WebElement nameMessage;
+    @FindBy(xpath = "//div[contains(text(), 'Last name is required')]")
+    WebElement lastNameMessage;
+    @FindBy(xpath = "//div[contains(text(), 'Email is required')]")
+    WebElement emailMessage;
+    @FindBy(xpath = "//div[contains(text(), 'Password is required')]")
+    WebElement passwordMessage;
+
 
     public void typeLoginForm(User user) {
         inputName.sendKeys(user.getFirstName());
@@ -38,7 +49,27 @@ public class SighUpPage {
 
     public void clickBtnRegistration() {
         inputTermsOfUse.click();
-        btnRegistration.click();
+        btnYallaRegistration.click();
+    }
+
+    public boolean isBtnYallaEnabled() {
+        return btnYallaRegistration.isEnabled();
+    }
+
+    public String nameMessage() {
+        return nameMessage.getText();
+    }
+
+    public String lastNameMessage() {
+        return lastNameMessage.getText();
+    }
+
+    public String emailMessage() {
+        return emailMessage.getText();
+    }
+
+    public String passwordMessage() {
+        return passwordMessage.getText();
     }
 
 

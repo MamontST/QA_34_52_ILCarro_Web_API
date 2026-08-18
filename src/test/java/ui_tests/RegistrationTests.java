@@ -1,7 +1,9 @@
 package ui_tests;
 
+import data_providers.UserDataProvider;
 import dto.User;
 import manager.AppManager;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -26,5 +28,13 @@ public class RegistrationTests extends AppManager {
         signUpPage.typeLoginForm(user);
         signUpPage.clickBtnRegistration();
     }
+
+    @Test(dataProvider = "dataProviderWrongNameOrPasswordOrEmail", dataProviderClass = UserDataProvider.class)
+    public void registrationWrongNameOrPasswordOrEmail(User user) {
+        signUpPage.typeLoginForm(user);
+        signUpPage.clickBtnRegistration();
+        Assert.assertFalse(signUpPage.isBtnYallaEnabled());
+    }
+
 
 }
