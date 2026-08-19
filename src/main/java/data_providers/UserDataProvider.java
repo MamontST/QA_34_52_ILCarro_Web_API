@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserDataProvider {
     @DataProvider
-    public Iterator<User> dataProviderWrongNameOrPasswordOrEmail() {
+    public Iterator<User> dataProviderForRegistrationWrongNameOrPasswordOrEmail() {
         List<User> users = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/wrong_name_email_password.csv"))) {
             String line = br.readLine();

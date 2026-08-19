@@ -8,32 +8,42 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
-import pages.SighUpPage;
+import pages.PopUpPage;
+import pages.RegistrationPage;
 
 import static utils.UserFactory.positiveRegistrationUser;
 
 public class RegistrationTests extends AppManager {
-    SighUpPage signUpPage;
+    RegistrationPage registrationPage;
     SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
     public void goToSighUpPage() {
         new HomePage(getDriver()).clickBtnRegistration();
-        signUpPage = new SighUpPage(getDriver());
+        registrationPage = new RegistrationPage(getDriver());
     }
 
     @Test
     public void registrationPositiveTest() {
         User user = positiveRegistrationUser();
-        signUpPage.typeLoginForm(user);
-        signUpPage.clickBtnRegistration();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickBtnRegistration();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test(dataProvider = "dataProviderWrongNameOrPasswordOrEmail", dataProviderClass = UserDataProvider.class)
+    @Test
+    public void registrationPositiveTestWithJS() {
+        User user = positiveRegistrationUser();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickBtnRegistrationWithJS();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
+    }
+
+    @Test(dataProvider = "dataProviderForRegistrationWrongNameOrPasswordOrEmail", dataProviderClass = UserDataProvider.class)
     public void registrationWrongNameOrPasswordOrEmail(User user) {
-        signUpPage.typeLoginForm(user);
-        signUpPage.clickBtnRegistration();
-        Assert.assertFalse(signUpPage.isBtnYallaEnabled());
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickBtnRegistration();
+        Assert.assertFalse(registrationPage.isBtnYallaEnabled());
     }
 
 

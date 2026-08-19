@@ -1,18 +1,17 @@
 package pages;
 
 import dto.User;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
-import static utils.UserFactory.positiveUser;
+import static pages.BasePage.driver;
 
-public class SighUpPage {
-    public SighUpPage(WebDriver driver) {
+public class RegistrationPage {
+    public RegistrationPage(WebDriver driver) {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
@@ -38,9 +37,10 @@ public class SighUpPage {
     WebElement emailMessage;
     @FindBy(xpath = "//div[contains(text(), 'Password is required')]")
     WebElement passwordMessage;
+    @FindBy(xpath = "//input[@id='terms-of-use']")
+    WebElement checkBoxTermsOfUse;
 
-
-    public void typeLoginForm(User user) {
+    public void typeRegistrationForm(User user) {
         inputName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
         inputEmail.sendKeys(user.getUsername());
@@ -51,6 +51,12 @@ public class SighUpPage {
         inputTermsOfUse.click();
         btnYallaRegistration.click();
     }
+
+    public void clickBtnRegistrationWithJS() {
+        clickCheckboxTermsOfUse();
+        btnYallaRegistration.click();
+    }
+
 
     public boolean isBtnYallaEnabled() {
         return btnYallaRegistration.isEnabled();
@@ -72,6 +78,10 @@ public class SighUpPage {
         return passwordMessage.getText();
     }
 
+    public void clickCheckboxTermsOfUse() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", checkBoxTermsOfUse);
+    }
 
 }
 
