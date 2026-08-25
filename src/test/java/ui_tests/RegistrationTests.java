@@ -19,6 +19,7 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod
     public void goToSighUpPage() {
+        logger.info("Navigating to Registration page");
         new HomePage(getDriver()).clickBtnRegistration();
         registrationPage = new RegistrationPage(getDriver());
     }
@@ -36,6 +37,14 @@ public class RegistrationTests extends AppManager {
         User user = positiveRegistrationUser();
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickBtnRegistrationWithJS();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
+    }
+
+    @Test
+    public void registrationPositiveTestWithActions() {
+        User user = positiveRegistrationUser();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
