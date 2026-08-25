@@ -20,6 +20,8 @@ public class HomePage extends BasePage {
     WebElement btnLogin;
     @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
     WebElement btnRegistration;
+    @FindBy(xpath = "//a[@ng-reflect-router-link='let-car-work']")
+    WebElement btnLetCarWork;
 
 
     public void clickBtnLogin() {
@@ -29,4 +31,10 @@ public class HomePage extends BasePage {
     public void clickBtnRegistration() {
         btnRegistration.click();
     }
+
+    public void clickBtnLetCarWork() {
+        btnLetCarWork.click();
+    }
+
+
 }
