@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import java.time.LocalDate;
+
 import static utils.PropertiesReader.*;
 
 public class HomePage extends BasePage {
@@ -22,6 +24,10 @@ public class HomePage extends BasePage {
     WebElement btnRegistration;
     @FindBy(xpath = "//a[@ng-reflect-router-link='let-car-work']")
     WebElement btnLetCarWork;
+    @FindBy(id = "city")
+    WebElement inputCity;
+    @FindBy(id = "dates")
+    WebElement inputDates;
 
 
     public void clickBtnLogin() {
@@ -34,6 +40,25 @@ public class HomePage extends BasePage {
 
     public void clickBtnLetCarWork() {
         btnLetCarWork.click();
+    }
+
+    public void typeSearchForm(String city,
+                               LocalDate startDate, LocalDate endDate) {
+        inputCity.sendKeys(city);
+        System.out.println(startDate);
+        System.out.println(endDate);
+        // 2026-09-04  9/4/2026 - 9/10/2026
+        System.out.println(startDate.getMonthValue());
+        System.out.println(startDate.getDayOfMonth());
+        String dates =
+                startDate.getMonthValue() + "/"
+                        + startDate.getDayOfMonth() + "/"
+                        + startDate.getYear() + " - "
+                        + endDate.getMonthValue() + "/"
+                        + endDate.getDayOfMonth() + "/"
+                        + endDate.getYear();
+        System.out.println(dates);
+        inputDates.sendKeys(dates);
     }
 
 

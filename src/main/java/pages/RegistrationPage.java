@@ -11,7 +11,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import static pages.BasePage.driver;
 
-public class RegistrationPage {
+public class RegistrationPage extends BasePage{
     public RegistrationPage(WebDriver driver) {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
