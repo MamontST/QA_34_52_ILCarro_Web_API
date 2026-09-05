@@ -4,13 +4,18 @@ import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.RetryAnalyzer;
+import utils.TestNGListener;
 
 import static utils.PropertiesReader.getProperty;
 import static utils.UserFactory.*;
+
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
@@ -48,7 +53,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginNegativeEmptyPasswordTest() {
         User user = User.builder()
-                .username(getProperty("base.properties","email"))
+                .username(getProperty("base.properties", "email"))
                 .password("")
                 .build();
         loginPage.typeLoginForm(user);
@@ -58,11 +63,11 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void loginNegativeEmptyEmailTest() {
         User user = User.builder()
                 .username("")
-                .password(getProperty("base.properties","password"))
+                .password(getProperty("base.properties", "password"))
                 .build();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnLogin();
