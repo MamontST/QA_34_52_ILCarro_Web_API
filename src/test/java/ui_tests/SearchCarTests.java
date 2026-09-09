@@ -11,12 +11,12 @@ import java.time.LocalDate;
 public class SearchCarTests extends AppManager {
     HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openHomePage() {
         homePage = new HomePage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke", "regress", "car", "positive"})
     public void searchCarPositiveTest() {
         String city = "Haifa";
         LocalDate startDate = LocalDate.now()
