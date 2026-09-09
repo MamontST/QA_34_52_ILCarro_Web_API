@@ -26,7 +26,7 @@ public abstract class BasePage {
     List<WebElement> listErrors;
 
     public boolean isTextInErrorPresent(String text) {
-        if  (listErrors == null || listErrors.isEmpty()) {
+        if (listErrors == null || listErrors.isEmpty()) {
             return false;
         }
         for (WebElement e : listErrors) {
@@ -44,12 +44,12 @@ public abstract class BasePage {
         } catch (RuntimeException e) {
 //            e.printStackTrace();
 //            System.out.println("created exeption");
-            logger.error("Created exeption",e);
+            logger.error("Created exeption", e);
         }
         return false;
     }
 
-    public void clickWait(WebElement element){
+    public void clickWait(WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(element))
                 .click();
@@ -63,11 +63,11 @@ public abstract class BasePage {
         }
     }
 
-    public <T extends BasePage> T clickHeaderButtons(HeaderMenu item){
+    public <T extends BasePage> T clickHeaderButtons(HeaderMenu item) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable
                         (By.xpath(item.getLocator()))).click();
-        switch (item){
+        switch (item) {
             case LOGO -> {
                 return (T) new HomePage(driver);
             }
@@ -98,5 +98,15 @@ public abstract class BasePage {
 
     public boolean isElementDisplaed(WebElement element) {
         return element.isDisplayed();
+    }
+
+    public boolean isUrlContainsText(String text) {
+        try {
+            return new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.urlContains(text));
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
