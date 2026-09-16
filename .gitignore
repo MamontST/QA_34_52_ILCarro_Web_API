@@ -40,6 +40,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-/src/test/properties/
+#/src/test/properties/
 src/test/resources/test_logs
 src/test/resources/screenshots
