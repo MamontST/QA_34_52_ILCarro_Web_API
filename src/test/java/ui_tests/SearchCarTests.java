@@ -65,18 +65,17 @@ public class SearchCarTests extends AppManager {
         String city = "Haifa";
         LocalDate date = LocalDate.now().plusDays(3);
         homePage.typeSearchFormWithCalendar(city, date, date);
-        homePage.clickBtnSubmitWithJS();
         Assert.assertTrue(homePage.isTextInErrorPresent("You can't book car for less than a day"));
     }
 
-//    @Test(groups = {"calendar"})
-//    public void searchCarNegativeMoreOneYearWithCalendarTest() {
-//        String city = "Haifa";
-//        LocalDate startDate = LocalDate.now().plusDays(1);
-//        LocalDate endDate = LocalDate.now().plusYears(1).plusDays(2);
-//        homePage.typeSearchFormWithCalendar(city, startDate, endDate);
-//        homePage.clickBtnSubmitWithJS();
-//        Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date after one year"));
-//    }
+    @Test(groups = {"calendar"})
+    public void searchCarNegativeMoreOneYearWithCalendarTest() {
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.now().plusDays(3);
+        LocalDate endDate = LocalDate.now().plusYears(1).plusDays(1);
+        homePage.typeSearchFormWithCalendar(city, startDate, endDate);
+        homePage.pressClickEscape();
+        Assert.assertTrue(homePage.isTextInErrorPresent("Dates are required"));
+    }
 
 }

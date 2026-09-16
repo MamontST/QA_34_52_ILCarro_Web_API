@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -95,6 +92,9 @@ public class HomePage extends BasePage {
                 .toString();
     }
 
+    public void pressClickEscape(){
+        inputDates.sendKeys(Keys.ESCAPE);
+    }
     public void clickBtnSubmitWithJS() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute('disabled')");
