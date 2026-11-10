@@ -56,6 +56,7 @@ public class LetTheCarWorkPage extends BasePage{
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
+//        inputFuel.sendKeys(car.getFuel());
         chooseFuel(car.getFuel());
         inputSeats.sendKeys(Integer.toString(car.getSeats()));
         inputCarClass.sendKeys(car.getCarClass());
